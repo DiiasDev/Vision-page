@@ -28,11 +28,16 @@
                 </div>
                 <div class="progress-line"></div>
                 <div class="progress-step" data-step="3">
+                    <div class="step-icon"><i class="fas fa-envelope"></i></div>
+                    <span class="step-label">E-mail</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="4">
                     <div class="step-icon"><i class="fas fa-phone"></i></div>
                     <span class="step-label">Contato</span>
                 </div>
                 <div class="progress-line"></div>
-                <div class="progress-step" data-step="4">
+                <div class="progress-step" data-step="5">
                     <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
                     <span class="step-label">Enviar</span>
                 </div>
@@ -92,8 +97,35 @@
                     </div>
                 </div>
 
-                <!-- Step 3: Celular -->
+                <!-- Step 3: E-mail -->
                 <div class="form-step" data-step="3">
+                    <div class="step-header">
+                        <h2>E-mail</h2>
+                        <p>Informe seu e-mail para contato</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="seuemail@exemplo.com"
+                            required
+                        >
+                        <small class="hint">Digite um e-mail válido</small>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn btn-prev" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button type="button" class="btn btn-next" onclick="nextStep()">
+                            Próximo <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Celular -->
+                <div class="form-step" data-step="4">
                     <div class="step-header">
                         <h2>Contato</h2>
                         <p>Informe seu número de celular</p>
@@ -119,8 +151,8 @@
                     </div>
                 </div>
 
-                <!-- Step 4: Confirmação -->
-                <div class="form-step" data-step="4">
+                <!-- Step 5: Confirmação -->
+                <div class="form-step" data-step="5">
                     <div class="step-header">
                         <h2>Revisão dos Dados</h2>
                         <p>Confira as informações antes de enviar</p>
@@ -138,6 +170,13 @@
                             <div class="summary-content">
                                 <span class="summary-label">Nome Completo</span>
                                 <span class="summary-value" id="summary-nome">-</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="summary-content">
+                                <span class="summary-label">E-mail</span>
+                                <span class="summary-value" id="summary-email">-</span>
                             </div>
                         </div>
                         <div class="summary-item">
@@ -163,7 +202,7 @@
 
     <script>
         let currentStep = 1;
-        const totalSteps = 4;
+        const totalSteps = 5;
 
         // Máscaras de input
         document.getElementById('placa').addEventListener('input', function(e) {
@@ -240,9 +279,10 @@
                 }
             });
 
-            if (currentStep === 4) {
+            if (currentStep === 5) {
                 document.getElementById('summary-placa').textContent = document.getElementById('placa').value;
                 document.getElementById('summary-nome').textContent = document.getElementById('nome').value;
+                document.getElementById('summary-email').textContent = document.getElementById('email').value;
                 document.getElementById('summary-celular').textContent = document.getElementById('celular').value;
             }
         }
@@ -250,12 +290,13 @@
         function sendToWhatsApp() {
             const placa = document.getElementById('placa').value;
             const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
             const celular = document.getElementById('celular').value;
-ç
             const message = ` *NOVA SOLICITAÇÃO DE COTAÇÃO*%0A` +
                           `━━━━━━━━━━━━━━━━━━━━━━━%0A%0A` +
                           ` *Dados do Cliente:*%0A%0A` +
                           ` *Nome:* ${nome}%0A` +
+                          ` *E-mail:* ${email}%0A` +
                           ` *Celular:* ${celular}%0A` +
                           ` *Placa do Veículo:* ${placa}%0A%0A` +
                           `━━━━━━━━━━━━━━━━━━━━━━━%0A` +
